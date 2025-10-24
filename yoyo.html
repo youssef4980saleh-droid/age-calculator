@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>حاسبة العمر</title>
+  <style>
+    body {
+      font-family: "Cairo", sans-serif;
+      background: linear-gradient(135deg, #6dd5fa, #2980b9);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 300px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    input {
+      padding: 8px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #2980b9;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #2980b9;
+      color: #fff;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .footer {
+      position: absolute;
+      top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="footer">إعداد: Youssef Saleh</div>
+
+  <div class="card">
+    <h1>حاسبة العمر</h1>
+    <label for="birthdate">ادخل تاريخ ميلادك:</label>
+    <input type="date" id="birthdate" />
+    <button onclick="calculateAge()">احسب العمر</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthInput = document.getElementById("birthdate").value;
+      if (!birthInput) {
+        document.getElementById("result").textContent = "من فضلك أدخل تاريخ الميلاد";
+        return;
+      }
+
+      const birthDate = new Date(birthInput);
+      const today = new Date();
+
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      const dayDiff = today.getDate() - birthDate.getDate();
+
+      if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+        age--;
+      }
+
+      document.getElementById("result").textContent = `عمرك الحالي هو: ${age} سنة 🎉`;
+    }
+  </script>
+</body>
+</html>
